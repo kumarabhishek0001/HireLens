@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "password feild is required"]
     }
-})
+}, {timestamps: true})
 
 
 const userModel = mongoose.model("users", userSchema)
