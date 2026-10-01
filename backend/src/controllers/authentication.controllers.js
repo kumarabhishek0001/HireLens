@@ -3,6 +3,22 @@ const userModel = require("../models/user.models");
 const bcrypt = require("bcryptjs");
 const generateJWT = require("../services/tokenGenerator");
 
+
+
+/**
+
+* Registers a new user and authenticates them using a JWT.
+* 
+* 
+* Checks whether the required fields are provided and whether
+* the email or username is already registered. The password is
+* hashed before storing the user in the database.
+* 
+* 
+* @param {import("express").Request} req - Express request object containing username, email, and password.
+* @param {import("express").Response} res - Express response object used to send the response.
+* @returns {Promise<import("express").Response>} Express response containing the created user or an error message.
+*/
 const registerUserController = async (req, res) => {
   const { username, email, password } = req.body;
 
