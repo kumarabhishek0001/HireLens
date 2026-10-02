@@ -143,6 +143,23 @@ const logoutUserController = async (req, res) => {
   });
 };
 
+
+/**
+
+* Fetches the authenticated user's information.
+*
+* The `authMiddleware` attaches the decoded JWT payload to `req.user`.
+* The user's ID is extracted from `req.user.id` and used to retrieve
+* the corresponding user document from the database.
+*
+* Only selected user fields are returned in the response, excluding
+* sensitive information such as the user's password.
+*
+* @param {import("express").Request} req - Express request object containing the authenticated user's data in `req.user`.
+* @param {import("express").Response} res - Express response object used to send the user's information.
+* @returns {Promise<void>} Resolves with a JSON response containing the authenticated user's information.
+  */
+
 const getUserInfoController = async (req, res) => {
   const userId = req.user.id
 
