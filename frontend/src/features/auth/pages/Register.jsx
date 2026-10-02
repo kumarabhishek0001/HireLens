@@ -1,9 +1,15 @@
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const {loading, handleRegister} = useAuth()
+
+  const navigate = useNavigate()
 
   function togglePassword(e) {
     const check_val = e.target.checked;
@@ -18,8 +24,14 @@ const Register = () => {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    await handleRegister({email, password, username});
+    navigate("/");
+  }
+
+  if(loading){
+    return <h1>Loading....</h1>  
   }
 
   return (
