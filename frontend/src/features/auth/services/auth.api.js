@@ -42,6 +42,7 @@ const logoutAPI = async() => {
 const getUserInfoAPI = async() => {
     try {
         const response = await api.get("/api/auth/get-me")
+        return response.data
     } catch (error) {
         console.log("Error at getUserInfoAPI", error)
     }

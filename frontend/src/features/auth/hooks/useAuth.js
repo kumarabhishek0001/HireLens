@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useAuthContext } from "../contexts/AuthContext"
 import { loginAPI, registerAPI, logoutAPI, getUserInfoAPI } from "../services/auth.api"
 
@@ -41,6 +42,23 @@ const useAuth = () => {
             setLoading(false)
         }
     }
+
+    async function reHydarateUser(){
+        try{
+        const data = await getUserInfoAPI()
+        console.log(data)
+        setUser(data.user)
+        }catch(error){
+            console.log("error at rehyderateUser", error)
+        }
+        finally{
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        reHydarateUser()
+    },[])
 
     return {handleRegister, handleLogout, handleLogin, user, loading}
     
