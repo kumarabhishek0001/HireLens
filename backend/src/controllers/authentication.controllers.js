@@ -1,4 +1,5 @@
 const userModel = require("../models/user.models");
+const blackListTokenModel = require("../models/blacklistedToken.models");
 
 const bcrypt = require("bcryptjs");
 const generateJWT = require("../services/tokenGenerator");
@@ -62,11 +63,11 @@ const registerUserController = async (req, res) => {
 
 /**
  * Login user and authenticate them using JWT.
- * 
+ *
  * Checks wheather the required fields are provided and whether
  * provided credentials matches user in database.
- * 
- * 
+ *
+ *
  * @param {import("express").Request} req Express request object containing username and password
  * @param {import("express").Response} res Express response object used to send response
  * @returns {Promise<import("express").Response>} Express response containing the created user or an error message
@@ -88,30 +89,46 @@ const loginUserController = async (req, res) => {
     });
   }
 
-  const isValidPassword = await bcrypt.compare(password, user.password)
+  const isValidPassword = await bcrypt.compare(password, user.password);
 
-  if(!isValidPassword){
+  if (!isValidPassword) {
     return res.status(401).json({
-      message: "Invalid credentials 2"
-    })
+      message: "Invalid credentials 2",
+    });
   }
 
-  const token = generateJWT(user._id, user.username)
+  const token = generateJWT(user._id, user.username);
 
-  res.cookie("token", token)
+  res.cookie("token", token);
 
   res.status(200).json({
     message: "user logged in sucessfully",
     user: {
       id: user._id,
       email: user.email,
-      username: user.username
+      username: user.username,
     },
-    token
-  })
+    token,
+  });
 };
 
-const logoutUserController = async (req, res) => {};
+const logoutUserController = async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return req.status(401).json({
+      message: "No token found",
+    });
+  }
+
+  blackListTokenModel.create({ token });
+
+  res.clearCookie("token");
+
+  res.status(200).json({
+    message: "Logged Out sucessfully",
+  });
+};
 
 const getUserInfoController = async (req, res) => {};
 
