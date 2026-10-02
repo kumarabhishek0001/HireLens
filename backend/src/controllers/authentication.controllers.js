@@ -143,7 +143,21 @@ const logoutUserController = async (req, res) => {
   });
 };
 
-const getUserInfoController = async (req, res) => {};
+const getUserInfoController = async (req, res) => {
+  const userId = req.user.id
+
+  const user = await userModel.findById(userId)
+
+  return res.status(200).json({
+    message: "User fetched successfulyy",
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      createAt: user.createdAt
+    }
+  })
+};
 
 module.exports = {
   registerUserController,
