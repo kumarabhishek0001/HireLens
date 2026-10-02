@@ -27,7 +27,7 @@ const authMiddleware = async (req, res, next) => {
     });
   }
 
-  const isTokenBlackListed = blackListTokenModel.findOne({ token });
+  const isTokenBlackListed = await blackListTokenModel.findOne({ token });
 
   if (isTokenBlackListed) {
     return res.status(401).json({
