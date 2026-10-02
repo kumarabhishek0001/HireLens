@@ -7,6 +7,9 @@ import {
 
 import { Login, Register } from "./features/auth/pages";
 import {Layout,History,Home} from "./features/app/pages";
+import Protected from "./features/auth/components/Protected";
+
+
 
 
 const router = createBrowserRouter(
@@ -15,7 +18,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Protected><Layout /></Protected>}>
         <Route index element={<Home />} />
         <Route path="history" element={<History />} />
       </Route>
