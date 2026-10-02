@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
+
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {loading, handleLogin} = useAuth()
+
+  const navigate = useNavigate()
 
   function togglePassword(e) {
     const check_val = e.target.checked;
@@ -17,8 +24,14 @@ const Login = () => {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    await handleLogin({email, password})
+    navigate("/")
+  }
+
+  if(loading){
+    return <h1>Loading....</h1>
   }
 
   return (
