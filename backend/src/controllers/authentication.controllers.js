@@ -112,6 +112,19 @@ const loginUserController = async (req, res) => {
   });
 };
 
+/**
+* Logs out the authenticated user by blacklisting their JWT and
+* clearing the token cookie from the client.
+*
+* The JWT is retrieved from the `token` cookie and stored in the
+* blacklist collection so that it can no longer be used for authentication.
+* The `token` cookie is then cleared from the client.
+*
+* @param {import("express").Request} req - Express request object containing the JWT in `req.cookies.token`.
+* @param {import("express").Response} res - Express response object used to clear the token cookie and send the logout response.
+* @returns {Promise<void>} Resolves after the token is blacklisted and the cookie is cleared.
+*/
+
 const logoutUserController = async (req, res) => {
   const token = req.cookies.token;
 
