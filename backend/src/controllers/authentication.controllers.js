@@ -60,7 +60,17 @@ const registerUserController = async (req, res) => {
   });
 };
 
-
+/**
+ * Login user and authenticate them using JWT.
+ * 
+ * Checks wheather the required fields are provided and whether
+ * provided credentials matches user in database.
+ * 
+ * 
+ * @param {import("express").Request} req Express request object containing username and password
+ * @param {import("express").Response} res Express response object used to send response
+ * @returns {Promise<import("express").Response>} Express response containing the created user or an error message
+ */
 const loginUserController = async (req, res) => {
   const { email, password } = req.body;
 
