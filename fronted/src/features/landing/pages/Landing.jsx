@@ -1,4 +1,5 @@
 import Hero from '../components/Hero';
+import TrustedCompanies from '../components/TrustedCompanies';
 import Navbar from './../components/Navbar';
 
 const Landing = () => {
@@ -6,6 +7,7 @@ const Landing = () => {
     <div className='bg-[#f7f8f9]'>
       <Navbar/>
       <Hero/>
+      <TrustedCompanies/>
     </div>
   )
 }
