@@ -1,0 +1,88 @@
+{
+  "matchScore": "88",
+  "technicalQuestions": [
+    {
+      "question": "Can you walk me through how you designed the real-time model inference service using FastAPI and Redis in your Fraud Detection System?",
+      "intention": "To verify the candidate's hands-on experience in building production-ready model-serving APIs and low-latency feature stores.",
+      "answer": "Discuss how FastAPI handles asynchronous endpoints, how Redis was utilized for high-speed temporary feature lookups before calling the Scikit-learn model, and how performance/latency was optimized."
+    },
+    {
+      "question": "How do you manage model training and deployment lifecycles, and what strategies would you use to scale GPU-based workloads using Kubernetes?",
+      "intention": "To gauge knowledge in MLOps and Kubernetes orchestration for heavy machine learning training and inference workloads.",
+      "answer": "Explain containerization with Docker, Kubernetes node selectors or taints/tolerations for GPU instances, and how CI/CD via GitHub Actions automates deployment pipelines."
+    },
+    {
+      "question": "In your distributed file processing platform, you used Go and RabbitMQ. How did you handle worker failures and message retries?",
+      "intention": "To test the candidate's understanding of distributed systems, message queuing semantics, and fault-tolerance.",
+      "answer": "Highlight the use of acknowledgement mechanisms, dead-letter queues (DLQ) in RabbitMQ, and idempotent worker logic implemented in Go."
+    },
+    {
+      "question": "How do you approach database schema design and query optimization for high-volume transactional workloads in PostgreSQL?",
+      "intention": "To evaluate backend engineering fundamentals, indexing strategies, and performance tuning capabilities.",
+      "answer": "Mention analyzing execution plans with EXPLAIN ANALYZE, creating appropriate B-tree or GIN indexes, partitioning large tables, and implementing connection pooling."
+    }
+  ],
+  "behavioralQuestion": [
+    {
+      "question": "Tell me about a time when you had to troubleshoot a performance bottleneck in production under tight constraints.",
+      "intention": "To assess problem-solving skills, calmness under pressure, and monitoring/observability practices.",
+      "answer": "Reference the resume achievement of improving API response times by 35% at CloudNova Technologies. Explain how Prometheus/Grafana or logs were used to spot the issue, the investigation steps taken, and the database/caching fix applied."
+    },
+    {
+      "question": "Describe a project where you had to quickly learn and apply a new tool or framework. How did you approach it?",
+      "intention": "To evaluate learning ability, adaptability, and technical curiosity.",
+      "answer": "Talk about adopting tools like Go or Kubernetes during project development or internship, focusing on official documentation, building small experimental components, and studying architectural best practices."
+    },
+    {
+      "question": "How do you collaborate with team members, such as data scientists or frontend engineers, to integrate backend services and ML pipelines?",
+      "intention": "To evaluate cross-functional communication, teamwork, and integration ownership.",
+      "answer": "Discuss establishing clear API contracts using OpenAPI/GraphQL, maintaining clean documentation, and iterating based on feedback during integration phases."
+    },
+    {
+      "question": "Can you share an experience where a technical decision you made didn't go as planned, and how you handled it?",
+      "intention": "To test accountability, resilience, and the ability to learn from mistakes.",
+      "answer": "Focus on an instance from university projects or internships where an initial architectural choice led to unexpected latency or tight coupling, and explain how it was refactored."
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": "GPU-based machine-learning workload optimization and orchestration",
+      "severity": "medium"
+    },
+    {
+      "skill": "Enterprise messaging systems like Apache Kafka",
+      "severity": "low"
+    },
+    {
+      "skill": "Infrastructure-as-Code using Terraform",
+      "severity": "low"
+    }
+  ],
+  "preparationPlan": [
+    {
+      "day": 1,
+      "focus": "MLOps and Model Serving Architecture",
+      "task": "Review concepts around model-serving APIs, ML lifecycle platforms, and strategies for deploying PyTorch/Scikit-learn models using FastAPI and Docker."
+    },
+    {
+      "day": 2,
+      "focus": "Kubernetes & Cloud Infrastructure",
+      "task": "Revise Kubernetes core concepts (pods, services, deployments, ingress) and how GPU workloads are managed in cluster environments. Review AWS services."
+    },
+    {
+      "day": 3,
+      "focus": "Distributed Systems & Asynchronous Processing",
+      "task": "Deep dive into message brokers (RabbitMQ/Redis), handling retries, idempotency, and asynchronous workflows implemented in your Go and Python projects."
+    },
+    {
+      "day": 4,
+      "focus": "Project & Resume Deep Dive",
+      "task": "Prepare detailed talking points for the Real-Time Fraud Detection System and Distributed File Processing Platform, focusing on design decisions and performance gains."
+    },
+    {
+      "day": 5,
+      "focus": "Behavioral & Mock Interview Practice",
+      "task": "Practice STAR-method responses for troubleshooting bottlenecks, cross-functional collaboration, and overcoming technical challenges using your actual work experience."
+    }
+  ]
+}

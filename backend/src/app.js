@@ -1,4 +1,6 @@
 const authRouter = require("./routes/authentication.routes.js")
+const interviewRouter = require("./routes/interview.routes.js");
+
 
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
@@ -24,6 +26,7 @@ app.get("/check-health", (req, res) => {
 
 // * Mounts the authentication routes under the /api/auth base path
 app.use("/api/auth", authRouter)
+app.use("/api/interview", interviewRouter)
 
 
 module.exports = app
