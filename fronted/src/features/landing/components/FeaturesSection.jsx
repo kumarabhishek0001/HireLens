@@ -53,7 +53,7 @@ const FeaturesSection = () => {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="flex min-h-[205px] flex-col rounded-md border border-gray-100 bg-white p-5 transition-shadow hover:shadow-md"
+              className="flex min-h-51.25 flex-col rounded-md border border-gray-100 bg-white p-5 transition-shadow hover:shadow-md"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-blue-50 text-lg text-blue-600">
                 {feature.icon}

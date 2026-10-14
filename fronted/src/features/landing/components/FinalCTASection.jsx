@@ -10,7 +10,7 @@ const FinalCTASection = () => {
         {/* Blue gradient on the right */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 w-3/5 bg-[radial-gradient(ellipse_at_right,_rgba(37,99,235,0.32),_transparent_70%)]"
+          className="pointer-events-none absolute inset-y-0 right-0 w-3/5 bg-[radial-gradient(ellipse_at_right,rgba(37,99,235,0.32),transparent_70%)]"
         />
 
         <div className="relative z-10 mx-auto max-w-2xl">
