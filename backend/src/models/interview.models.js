@@ -70,7 +70,12 @@ const preparationPlanSchema = new mongoose.Schema({
 });
 
 const interviewReportSchema = new mongoose.Schema(
-  {
+  { 
+    title: {
+      type: String,
+      required: [true, "Job title is required"]
+    },
+
     jobDescription: {
       type: String,
       required: [true, "Job description is required"],
