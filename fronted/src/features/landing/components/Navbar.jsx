@@ -2,9 +2,9 @@
 
 const Navbar = () => {
   return (
-    <div className="p-4 px-5 flex justify-between items-center shadow-2xs">
+    <div className="p-4 px-5 bg-white flex justify-between items-center shadow-sm">
         <div className="font-fancy text-2xl font-semibold">hireLense</div>
-        <div className="flex gap-7 text-[#4a505a] text-sm translate-x-6">
+        <div className="flex gap-10 text-[#4a505a] text-sm translate-x-6">
             <p>Features</p>
             <p>How it works</p>
             <p>Reviews</p>
