@@ -11,8 +11,8 @@ const Navbar = () => {
             <p>Pricing</p>
         </div>
         <div className="flex gap-4 text-sm">
-            <button className="text-[#4a505a]">Sign in</button>
-            <button className="px-2 py-1 rounded bg-primary text-white">Get Started</button>
+            <button className="text-[#4a505a] cursor-pointer hover:text-gray-800">Sign in</button>
+            <button className="px-2 py-1 rounded bg-primary text-white cursor-pointer transition-all hover:bg-[#093bc3] active:scale-95">Get Started</button>
         </div>
     </div>
   )
