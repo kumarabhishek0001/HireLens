@@ -1,7 +1,9 @@
 import { MoveRight } from "lucide-react";
 import ResumeAnalysisDashboard from "./ResumeAnalysisDashboard";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-[#f7f8f9] min-h-screen mt-20 flex flex-col items-center">
       <h1 className="text-6xl text-center font-semibold">
@@ -15,7 +17,11 @@ const Hero = () => {
         behavioral inquiries.
       </p>
 
-      <button className="w-fit mt-8 mb-18 bg-primary text-white text-lg px-7 py-2 rounded flex gap-2">
+      <button 
+      onClick={() => {
+            navigate("/login");
+          }}
+      className="w-fit mt-8 mb-18 bg-primary text-white text-lg px-7 py-2 rounded flex gap-2">
         <div>Analyze Now</div>
         <div className="translate-y-0.5">
           <MoveRight />
