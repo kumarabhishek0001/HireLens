@@ -1,8 +1,9 @@
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "./../hooks/useAuth";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const benefits = [
@@ -26,6 +27,28 @@ const Signup = () => {
     },
   ];
 
+  const { loading, handleRegister } = useAuth();
+  const [error, setError] = useState("");
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await handleRegister({ username, email, password });
+      navigate("/home");
+    } catch (err) {
+      setError(err.response?.data?.message || "regsiter failed");
+    }
+  };
+
+  if (loading) {
+    return <div>loading....</div>;
+  }
+
   return (
     <main className="grid min-h-screen bg-[#f7f8fa] font-sans text-[#17191f] lg:grid-cols-2">
       {/* Left panel */}
@@ -47,9 +70,9 @@ const Signup = () => {
           </h1>
 
           <p className="mt-4 max-w-lg text-sm leading-7 text-[#626875]">
-            Create your free account to uncover blind spots, improve
-            your interview preparation, and approach your next opportunity
-            with confidence.
+            Create your free account to uncover blind spots, improve your
+            interview preparation, and approach your next opportunity with
+            confidence.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -63,9 +86,7 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold">
-                    {benefit.title}
-                  </h3>
+                  <h3 className="text-sm font-semibold">{benefit.title}</h3>
 
                   <p className="mt-1 text-xs leading-5 text-gray-500">
                     {benefit.description}
@@ -84,8 +105,8 @@ const Signup = () => {
                     index === 0
                       ? "bg-blue-600"
                       : index === 1
-                      ? "bg-slate-600"
-                      : "bg-indigo-500"
+                        ? "bg-slate-600"
+                        : "bg-indigo-500"
                   }`}
                 >
                   {initials}
@@ -98,9 +119,7 @@ const Signup = () => {
             </div>
 
             <div>
-              <div className="text-sm tracking-[2px] text-amber-500">
-                ★★★★★
-              </div>
+              <div className="text-sm tracking-[2px] text-amber-500">★★★★★</div>
               <p className="mt-1 text-xs text-gray-500">
                 Helping candidates prepare with confidence
               </p>
@@ -122,17 +141,19 @@ const Signup = () => {
 
           <form
             className="mt-7 space-y-5"
-            onSubmit={(event) => event.preventDefault()}
+            onSubmit={(event) => handleSignUpSubmit(event)}
           >
             <div>
               <label
                 htmlFor="signup-name"
                 className="mb-2 block text-sm font-medium"
               >
-                Full name
+                Username
               </label>
 
               <input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 id="signup-name"
                 type="text"
                 name="name"
@@ -152,6 +173,8 @@ const Signup = () => {
               </label>
 
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 id="signup-email"
                 type="email"
                 name="email"
@@ -172,6 +195,8 @@ const Signup = () => {
 
               <div className="relative">
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   id="signup-password"
                   type={showPassword ? "text" : "password"}
                   name="password"
@@ -197,8 +222,6 @@ const Signup = () => {
               </p>
             </div>
 
-            
-
             <button
               type="submit"
               className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover"
@@ -207,6 +230,12 @@ const Signup = () => {
               <span aria-hidden="true">→</span>
             </button>
           </form>
+
+          {error && (
+            <p className="text-sm text-red-600" role="alert">
+              {error}
+            </p>
+          )}
 
           <p className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
