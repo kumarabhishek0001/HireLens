@@ -1,4 +1,5 @@
 import axios from "axios";
+import logger from "../../../utils/logger";
 
 const api = axios.create({
   baseURL: "http://localhost:5000/api/auth",
@@ -16,7 +17,8 @@ async function registerAPI({ username, email, password }) {
     return registerResponse.data;
   } catch (error) {
     //! How to handle the error in the frontend
-    console.log("Error at registerAPI", error);
+    logger.error("Error at registerAPI", error)
+    throw error
   }
 }
 
@@ -29,7 +31,7 @@ async function loginAPI({ email, password }) {
 
     return loginResponse.data;
   } catch (error) {
-    console.log("Error at loginAPI", error);
+    logger.error("Error at loginAPI", error)
     throw error
   }
 }
