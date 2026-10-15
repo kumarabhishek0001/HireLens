@@ -10,7 +10,8 @@ const useAuth = () => {
             const resp = await registerAPI({username, email, password})
             setUser(resp.user)
         }catch(err){
-            console.log("Error at handleRegister hook", err);
+            console.log("Error at handleRegister hook", err.response?.data?.message);
+            throw err
         }
         finally{
             setLoading(false)
