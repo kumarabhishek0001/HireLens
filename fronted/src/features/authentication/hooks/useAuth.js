@@ -24,7 +24,8 @@ const useAuth = () => {
             setUser(resp.user)
         }
         catch(err){
-            console.log("handle login error", err)
+            console.log("handle login error", err.response?.data?.message)
+            throw err
         }
         finally{
             setLoading(false)

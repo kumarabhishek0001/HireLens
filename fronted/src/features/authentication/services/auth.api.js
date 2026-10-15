@@ -30,6 +30,7 @@ async function loginAPI({ email, password }) {
     return loginResponse.data;
   } catch (error) {
     console.log("Error at loginAPI", error);
+    throw error
   }
 }
 
