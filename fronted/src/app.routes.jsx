@@ -4,6 +4,9 @@ import Landing from "./features/landing/pages/Landing"
 import Login from "./features/authentication/pages/Login"
 import Signup from "./features/authentication/pages/SignUp"
 import Health from "./health"
+import Protected from "./features/authentication/components/Protected"
+
+
 
 
 const router = createBrowserRouter(
@@ -13,7 +16,7 @@ const router = createBrowserRouter(
             <Route path="health" element={<Health/>}/>
             <Route path="login" element={<Login/>}/>
             <Route path="signup" element={<Signup/>}/>
-            <Route path="home" element={<h1>Home</h1>}/>
+            <Route path="home" element={<Protected><h1>Home</h1></Protected>}/>
         </Route>
     )
 )
