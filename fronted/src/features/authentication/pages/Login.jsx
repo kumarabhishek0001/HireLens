@@ -1,8 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const { loading, handleLogin } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await handleLogin({ email, password });
+      navigate("/home");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className="grid min-h-screen bg-[#f7f8fa] font-sans text-[#17191f] lg:grid-cols-2">
@@ -115,7 +140,7 @@ const Login = () => {
 
             <form
               className="mt-7 space-y-5"
-              onSubmit={(event) => event.preventDefault()}
+              onSubmit={(event) => handleLoginSubmit(event)}
             >
               <div>
                 <label
@@ -126,6 +151,8 @@ const Login = () => {
                 </label>
 
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="login-email"
                   type="email"
                   name="email"
@@ -155,6 +182,8 @@ const Login = () => {
 
                 <div className="relative">
                   <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     id="login-password"
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -175,9 +204,12 @@ const Login = () => {
                     {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
+                {error && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {error}
+                  </p>
+                )}
               </div>
-
-              
 
               <button
                 type="submit"
