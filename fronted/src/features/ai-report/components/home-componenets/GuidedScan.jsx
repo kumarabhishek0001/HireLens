@@ -1,4 +1,6 @@
 import { SlidersVerticalIcon, MoveRightIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 const guidedSteps = [
     {
@@ -19,6 +21,9 @@ const guidedSteps = [
   ];
 
 const GuidedScan = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div>
       <h2 className="px-1 mt-7 text-lg font-bold">Analyze New Opportunity</h2>
@@ -45,7 +50,7 @@ const GuidedScan = () => {
         {/* step */}
         <div className="mt-6 flex justify-between gap-3  border-border">
           {guidedSteps.map((steps) => (
-            <div className="flex-1 p-2 bg-[#f9fbfd] border rounded-md border-border flex gap-2">
+            <div key={steps.id} className="flex-1 p-2 bg-[#f9fbfd] border rounded-md border-border flex gap-2">
               <div className="translate-y-0.5 bg-[#dbeafe] rounded-2xl flex justify-center items-center w-fit h-fit px-4 py-2">
                 <p className="text-primary">{steps.id}</p>
               </div>
@@ -68,7 +73,7 @@ const GuidedScan = () => {
           </div>
 
           <div>
-            <button className="flex gap-3 bg-primary text-white px-5 py-3 rounded-md">
+            <button onClick={() => {navigate("/home/analyze")}} className="cursor-pointer flex gap-3 bg-primary text-white px-5 py-3 rounded-md">
               Start 3-Step Analysis <MoveRightIcon />
             </button>
           </div>
