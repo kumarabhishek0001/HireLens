@@ -12,6 +12,7 @@ import Protected from "./features/authentication/components/Protected";
 import Home from "./features/ai-report/pages/Home";
 import Recents from "./features/ai-report/pages/RecentsPage";
 import Layout from "./features/ai-report/pages/Layout";
+import Analyze from "./features/ai-report/pages/Analyze";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} />
       <Route path="home" element={<Protected><Layout /></Protected>}>
         <Route index element={<h1><Home/></h1>} />
-        <Route path="analyze" element={<h1>Analyze</h1>} />
+        <Route path="analyze" element={<Analyze/>} />
         <Route path="recents" element={<Recents/>} />
       </Route>
     </Route>,
