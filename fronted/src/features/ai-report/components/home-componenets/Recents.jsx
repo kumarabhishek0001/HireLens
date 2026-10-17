@@ -1,100 +1,104 @@
 import { ArrowRightIcon, MoveRightIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useInterviewHook } from "../../hooks/useInterviewHook";
 
-const interviewReports = [
-  {
-    _id: "6ad1ef46838164bf131aeebd",
-    title: "Frontend Engineer",
-    company: "Xylixn",
-    matchScore: 82,
-    skillGaps: [
-      {
-        skill: "Terraform / Infrastructure as Code",
-        severity: "medium",
-        _id: "6ad1ef46838164bf131aeebe",
-      },
-      {
-        skill: "Monitoring Tools (Prometheus and Grafana)",
-        severity: "medium",
-        _id: "6ad1ef46838164bf131aeebf",
-      },
-      {
-        skill: "Message Brokers (Kafka or RabbitMQ)",
-        severity: "low",
-        _id: "6ad1ef46838164bf131aeec0",
-      },
-    ],
-    user: "6ad090eb5d12b41c936feb4a",
-    createdAt: "2026-10-16T09:32:54.761Z",
-    updatedAt: "2026-10-16T09:32:54.761Z",
-  },
-  {
-    _id: "6ad1eee9838164bf131aeeb3",
-    title: "Machine Learning Platform Engineer",
-    company: "Canva",
-    matchScore: 82,
-    skillGaps: [
-      {
-        skill: "Terraform / Infrastructure as Code",
-        severity: "medium",
-        _id: "6ad1eee9838164bf131aeeb4",
-      },
-      {
-        skill: "Kafka or RabbitMQ message brokers",
-        severity: "medium",
-        _id: "6ad1eee9838164bf131aeeb5",
-      },
-      {
-        skill: "PyTorch or TensorFlow model training specifics",
-        severity: "low",
-        _id: "6ad1eee9838164bf131aeeb6",
-      },
-      {
-        skill: "Prometheus and Grafana monitoring tools",
-        severity: "medium",
-        _id: "6ad1eee9838164bf131aeeb7",
-      },
-    ],
-    user: "6ad090eb5d12b41c936feb4a",
-    createdAt: "2026-10-16T09:31:21.145Z",
-    updatedAt: "2026-10-16T09:31:21.145Z",
-  },
-  {
-    _id: "6ad1edaa838164bf131aeeaa",
-    title: "Machine Learning Platform Engineer",
-    company: "Figma",
-    matchScore: 82,
-    skillGaps: [
-      {
-        skill: "Terraform",
-        severity: "medium",
-        _id: "6ad1edaa838164bf131aeeab",
-      },
-      {
-        skill: "Kafka / RabbitMQ",
-        severity: "medium",
-        _id: "6ad1edaa838164bf131aeeac",
-      },
-      {
-        skill: "Prometheus and Grafana",
-        severity: "low",
-        _id: "6ad1edaa838164bf131aeead",
-      },
-    ],
-    user: "6ad090eb5d12b41c936feb4a",
-    createdAt: "2026-10-16T09:26:02.139Z",
-    updatedAt: "2026-10-16T09:26:02.139Z",
-  },
-];
+// const interviewReports = [
+//   {
+//     _id: "6ad1ef46838164bf131aeebd",
+//     title: "Frontend Engineer",
+//     company: "Xylixn",
+//     matchScore: 82,
+//     skillGaps: [
+//       {
+//         skill: "Terraform / Infrastructure as Code",
+//         severity: "medium",
+//         _id: "6ad1ef46838164bf131aeebe",
+//       },
+//       {
+//         skill: "Monitoring Tools (Prometheus and Grafana)",
+//         severity: "medium",
+//         _id: "6ad1ef46838164bf131aeebf",
+//       },
+//       {
+//         skill: "Message Brokers (Kafka or RabbitMQ)",
+//         severity: "low",
+//         _id: "6ad1ef46838164bf131aeec0",
+//       },
+//     ],
+//     user: "6ad090eb5d12b41c936feb4a",
+//     createdAt: "2026-10-16T09:32:54.761Z",
+//     updatedAt: "2026-10-16T09:32:54.761Z",
+//   },
+//   {
+//     _id: "6ad1eee9838164bf131aeeb3",
+//     title: "Machine Learning Platform Engineer",
+//     company: "Canva",
+//     matchScore: 82,
+//     skillGaps: [
+//       {
+//         skill: "Terraform / Infrastructure as Code",
+//         severity: "medium",
+//         _id: "6ad1eee9838164bf131aeeb4",
+//       },
+//       {
+//         skill: "Kafka or RabbitMQ message brokers",
+//         severity: "medium",
+//         _id: "6ad1eee9838164bf131aeeb5",
+//       },
+//       {
+//         skill: "PyTorch or TensorFlow model training specifics",
+//         severity: "low",
+//         _id: "6ad1eee9838164bf131aeeb6",
+//       },
+//       {
+//         skill: "Prometheus and Grafana monitoring tools",
+//         severity: "medium",
+//         _id: "6ad1eee9838164bf131aeeb7",
+//       },
+//     ],
+//     user: "6ad090eb5d12b41c936feb4a",
+//     createdAt: "2026-10-16T09:31:21.145Z",
+//     updatedAt: "2026-10-16T09:31:21.145Z",
+//   },
+//   {
+//     _id: "6ad1edaa838164bf131aeeaa",
+//     title: "Machine Learning Platform Engineer",
+//     company: "Figma",
+//     matchScore: 82,
+//     skillGaps: [
+//       {
+//         skill: "Terraform",
+//         severity: "medium",
+//         _id: "6ad1edaa838164bf131aeeab",
+//       },
+//       {
+//         skill: "Kafka / RabbitMQ",
+//         severity: "medium",
+//         _id: "6ad1edaa838164bf131aeeac",
+//       },
+//       {
+//         skill: "Prometheus and Grafana",
+//         severity: "low",
+//         _id: "6ad1edaa838164bf131aeead",
+//       },
+//     ],
+//     user: "6ad090eb5d12b41c936feb4a",
+//     createdAt: "2026-10-16T09:26:02.139Z",
+//     updatedAt: "2026-10-16T09:26:02.139Z",
+//   },
+// ];
 
 const Recents = () => {
-
-    const handleClick = (report) => {
-        console.log(report._id)
-        console.log(report.title)
-    }
-
   const navigate = useNavigate();
+  const { loading, reports } = useInterviewHook();
+
+  const interviewReports = reports;
+
+  const handleClick = (report) => {
+    navigate(`/home/reports/${report._id}`);
+    console.log(report._id);
+    console.log(report.title);
+  };
 
   const getTimeAgo = (createdAt) => {
     const now = Date.now();
@@ -123,6 +127,14 @@ const Recents = () => {
     return `${diffInDays} ${diffInDays === 1 ? "day" : "days"} ago`;
   };
 
+  if (loading) {
+    return (
+      <main>
+        <h1>Loading.....</h1>
+      </main>
+    );
+  }
+
   return (
     <div className="mt-10">
       <div className="flex justify-between items-center mb-3">
@@ -137,7 +149,7 @@ const Recents = () => {
         </button>
       </div>
 
-      <div className="bg-white border border-border rounded-lg shadow-sm px-6 py-2">
+      <div className="h-[200px] bg-white border border-border rounded-lg shadow-sm px-6 py-2 overflow-auto">
         {interviewReports.map((report, index) => (
           <div
             key={report._id}
@@ -170,8 +182,9 @@ const Recents = () => {
               </div>
 
               <button
-               onClick={() => handleClick(report)}
-               className="cursor-pointer">
+                onClick={() => handleClick(report)}
+                className="cursor-pointer"
+              >
                 <MoveRightIcon size={18} className="text-[#6a7282] shrink-0" />
               </button>
             </div>

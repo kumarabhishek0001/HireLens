@@ -1,4 +1,8 @@
-import { FileChartLineIcon, Home, RotateCcwClockIcon } from "lucide-react";
+import {
+  FileChartLineIcon,
+  Home,
+  RotateCcwClockIcon,
+} from "lucide-react";
 import HireLensIcon from "./../components/Logo";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -23,10 +27,10 @@ const Layout = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Sidebar */}
-      <nav className="w-64 shrink-0 border-r border-gray-100 bg-white px-4 py-5">
-        {/* Logo */}
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Sidebar: stays stationary */}
+      <nav className="h-full w-64 shrink-0 border-r border-gray-100 bg-white px-4 py-5">
+        {/* Logo and title */}
         <div className="flex items-center gap-3 border-b border-gray-200 pb-4">
           <HireLensIcon />
 
@@ -35,7 +39,7 @@ const Layout = () => {
           </h1>
         </div>
 
-        {/* Navigation */}
+        {/* Navigation: stays stationary */}
         <div className="mt-8 flex flex-col gap-2">
           {navItems.map(({ to, label, Icon, end }) => (
             <NavLink
@@ -59,8 +63,8 @@ const Layout = () => {
         </div>
       </nav>
 
-      {/* Page content */}
-      <main className="min-w-0 flex-1 p-5">
+      {/* Only the Outlet content scrolls */}
+      <main className="min-w-0 min-h-0 flex-1 overflow-y-auto p-5">
         <Outlet />
       </main>
     </div>

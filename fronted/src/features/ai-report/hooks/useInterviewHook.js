@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 
 import {
   generateInterviewReport,
@@ -13,7 +13,7 @@ export const useInterviewHook = () => {
   const { loading, setLoading, report, setReport, reports, setReports } =
     useInterviewContext();
 
-  const {reportId} = useParams();
+
   const handleGenerateReport = async ({
     selfDescription,
     jobDescription,
@@ -62,7 +62,7 @@ export const useInterviewHook = () => {
     try {
       let response = null;
       response = await getAllInterviewReport();
-      setReports(response.interviewReports);
+      setReports(response.interviewReports ?? []);
     } catch (error) {
       console.log("error at handleGetAllInterview", error);
       throw error;
@@ -70,6 +70,18 @@ export const useInterviewHook = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchAllReports = async () => {
+      try {
+        await handleGetAllInterviewReport();
+      } catch (error) {
+        console.log(error, "at interview hook useEffect");
+      }
+    };
+
+    fetchAllReports()
+  }, []);
 
   // useEffect(() => {
   //   if (reportId) {
