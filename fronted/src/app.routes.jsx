@@ -13,6 +13,7 @@ import Home from "./features/ai-report/pages/Home";
 import Recents from "./features/ai-report/pages/RecentsPage";
 import Layout from "./features/ai-report/pages/Layout";
 import Analyze from "./features/ai-report/pages/Analyze";
+import ReportPage from "./features/ai-report/pages/Report";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
         <Route index element={<h1><Home/></h1>} />
         <Route path="analyze" element={<Analyze/>} />
         <Route path="recents" element={<Recents/>} />
+        <Route path="reports/:reportId" element={<ReportPage />} />
       </Route>
     </Route>,
   ),

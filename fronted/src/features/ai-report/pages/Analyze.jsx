@@ -1,3 +1,6 @@
+import {useInterviewHook} from "../hooks/useInterviewHook.js"
+import { useNavigate } from "react-router-dom";
+
 
 import { useRef, useState } from "react";
 import {
@@ -11,8 +14,16 @@ import {
 } from "lucide-react";
 
 const Analyze = () => {
+  const navigate = useNavigate()
+  
+
+  const {loading, handleGenerateReport} = useInterviewHook()
+
+
+
   const fileInputRef = useRef(null);
 
+  // state
   const [formData, setFormData] = useState({
     roleTitle: "",
     company: "",
@@ -22,6 +33,7 @@ const Analyze = () => {
 
   const [resume, setResume] = useState(null);
 
+  // function to handle change in forms
   const updateField = (field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -29,6 +41,7 @@ const Analyze = () => {
     }));
   };
 
+  // validate Resume
   const validateResume = (file) => {
     if (!file) return false;
 
@@ -50,12 +63,16 @@ const Analyze = () => {
     return true;
   };
 
+
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
 
     if (validateResume(file)) {
       setResume(file);
-    } else if (file) {
+    } 
+    // Imagine a user selects an invalid file, such as photo.png. 
+    // Clearing the input ensures the invalid selection isn't left in the file picker.
+    else if (file) {
       event.target.value = "";
     }
   };
@@ -82,7 +99,7 @@ const Analyze = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (
@@ -96,18 +113,21 @@ const Analyze = () => {
       return;
     }
 
-    console.log("Calibration data:", formData);
-    console.log("Resume:", resume);
-
-    // Connect your calibration API here.
+    const data = await handleGenerateReport({selfDescription: formData.narrative, jobDescription:formData.jobDescription, title: formData.roleTitle, company: formData.company, resumeFile: resume})
+    console.log("fetched data:",data)
+    navigate(`/home/reports/${data._id}`);
   };
 
-  const handleSaveDraft = () => {
-    console.log("Draft:", formData);
-    console.log("Resume:", resume);
 
-    // Connect your save-draft functionality here.
-  };
+  if(loading){
+    return (
+      <main>
+        <h1>Loading your interview plans....</h1>
+      </main>
+    )
+  }
+
+  
 
   const inputClass =
     "w-full rounded-md border border-border bg-[#f3f4f6] px-3 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-500 outline-none transition focus:border-primary focus:ring-2 focus:ring-blue-100";
@@ -119,7 +139,7 @@ const Analyze = () => {
 
   return (
     <div className="min-h-full bg-[#f7f8fa] px-5 py-6 md:px-7 lg:px-8">
-      <div className="mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-350">
         {/* Page heading */}
         <div className="mb-6">
           <h1 className="text-2xl font-semibold tracking-tight text-[#17191c] md:text-3xl">
@@ -212,7 +232,7 @@ const Analyze = () => {
                   updateField("jobDescription", e.target.value)
                 }
                 placeholder="Paste responsibilities, key qualifications, core technical requirements, leadership metrics, and tech stack qualifications..."
-                className={`${inputClass} min-h-[140px] resize-y leading-6`}
+                className={`${inputClass} min-h-35 resize-y leading-6`}
                 required
               />
 
@@ -266,7 +286,7 @@ const Analyze = () => {
               value={formData.narrative}
               onChange={(e) => updateField("narrative", e.target.value)}
               placeholder="Describe your strongest skills, notable achievements, leadership experience, measurable impact, and what differentiates your work..."
-              className={`${inputClass} min-h-[130px] resize-y leading-6`}
+              className={`${inputClass} min-h-32.5 resize-y leading-6`}
               required
             />
 
@@ -335,7 +355,7 @@ const Analyze = () => {
                   fileInputRef.current?.click();
                 }
               }}
-              className={`flex min-h-[180px] flex-col items-center justify-center rounded-lg border border-dashed px-4 py-7 text-center transition ${
+              className={`flex min-h-45 flex-col items-center justify-center rounded-lg border border-dashed px-4 py-7 text-center transition ${
                 resume
                   ? "border-blue-300 bg-blue-50/50"
                   : "cursor-pointer border-[#e5e7eb] bg-[#f3f4f6] hover:border-blue-300 hover:bg-blue-50/30"
@@ -430,7 +450,7 @@ const Analyze = () => {
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                onClick={handleSaveDraft}
+                
                 className="rounded-md bg-[#f0f1f3] px-4 py-3 text-xs font-medium text-neutral-800 transition hover:bg-[#e5e7eb]"
               >
                 Save Draft &amp; Exit
