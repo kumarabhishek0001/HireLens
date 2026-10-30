@@ -7,7 +7,7 @@ import App from "./App";
 import Landing from "./features/landing/pages/Landing";
 import Login from "./features/authentication/pages/Login";
 import Signup from "./features/authentication/pages/SignUp";
-import Health from "./health";
+// import Health from "./health";
 import Protected from "./features/authentication/components/Protected";
 import Home from "./features/ai-report/pages/Home";
 import Recents from "./features/ai-report/pages/RecentsPage";
@@ -19,7 +19,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="" element={<Landing />} />
-      <Route path="health" element={<Health />} />
+      {/* <Route path="health" element={<Health />} /> */}
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="home" element={<Protected><Layout /></Protected>}>
