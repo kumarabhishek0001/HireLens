@@ -47,24 +47,22 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    const getAndSetUserInfo = async () => {
-        try {
-            const resp = await getUserDetailsAPI();
-            setUser(resp.user);
-        } catch (error) {
+  const getAndSetUserInfo = async () => {
+    try {
+      const resp = await getUserDetailsAPI();
+      setUser(resp.user);
+    } catch (error) {
+      if (error.response?.status === 401) {
+        setUser(null);
+      } else {
+        console.error("Error fetching user:", error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            if (error.response?.status === 401) {
-                setUser(null);
-            } else {
-                console.error("Error fetching user:", error);
-            }
-
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    getAndSetUserInfo();
+  getAndSetUserInfo();
 }, []);
 
   return {

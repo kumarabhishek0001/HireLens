@@ -48,10 +48,11 @@ async function logoutAPI(){
 
 async function getUserDetailsAPI(){
     try {
-        const getUserDetailResponse = await api.get("/get-me")
-        return getUserDetailResponse.data
+        const getUserDetailResponse = await api.get("/get-me");
+        return getUserDetailResponse.data;
     } catch (error) {
-        console.log("Error at getUserDetailsAPI", error)
+        console.log("Error at getUserDetailsAPI", error);
+        throw error; 
     }
 }
 
