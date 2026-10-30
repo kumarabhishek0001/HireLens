@@ -46,13 +46,16 @@ async function logoutAPI(){
     }
 }
 
-async function getUserDetailsAPI(){
+async function getUserDetailsAPI() {
     try {
-        const getUserDetailResponse = await api.get("/get-me");
-        return getUserDetailResponse.data;
+        const response = await api.get("/get-me");
+        return response.data;
     } catch (error) {
-        console.log("Error at getUserDetailsAPI", error);
-        throw error; 
+        if (error.response?.status === 401) {
+            return null;
+        }
+
+        throw error;
     }
 }
 
