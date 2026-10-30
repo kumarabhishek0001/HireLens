@@ -25,3 +25,7 @@ dist-ssr
 
 # custom-files
 src/Health.jsx
+
+
+# Environments
+.env

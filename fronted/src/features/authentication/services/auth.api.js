@@ -2,7 +2,7 @@ import axios from "axios";
 import logger from "../../../utils/logger";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/auth",
+  baseURL: import.meta.env.VITE_BACKEND_URL_AUTH,
   withCredentials: true,
 });
 
