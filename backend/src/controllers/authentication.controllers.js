@@ -48,7 +48,12 @@ const registerUserController = async (req, res) => {
 
   const token = generateJWT(new_user._id, new_user.username);
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   return res.status(201).json({
     message: "User Created Successfully",
@@ -99,7 +104,12 @@ const loginUserController = async (req, res) => {
 
   const token = generateJWT(user._id, user.username);
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   res.status(200).json({
     message: "user logged in sucessfully",
@@ -113,17 +123,17 @@ const loginUserController = async (req, res) => {
 };
 
 /**
-* Logs out the authenticated user by blacklisting their JWT and
-* clearing the token cookie from the client.
-*
-* The JWT is retrieved from the `token` cookie and stored in the
-* blacklist collection so that it can no longer be used for authentication.
-* The `token` cookie is then cleared from the client.
-*
-* @param {import("express").Request} req - Express request object containing the JWT in `req.cookies.token`.
-* @param {import("express").Response} res - Express response object used to clear the token cookie and send the logout response.
-* @returns {Promise<void>} Resolves after the token is blacklisted and the cookie is cleared.
-*/
+ * Logs out the authenticated user by blacklisting their JWT and
+ * clearing the token cookie from the client.
+ *
+ * The JWT is retrieved from the `token` cookie and stored in the
+ * blacklist collection so that it can no longer be used for authentication.
+ * The `token` cookie is then cleared from the client.
+ *
+ * @param {import("express").Request} req - Express request object containing the JWT in `req.cookies.token`.
+ * @param {import("express").Response} res - Express response object used to clear the token cookie and send the logout response.
+ * @returns {Promise<void>} Resolves after the token is blacklisted and the cookie is cleared.
+ */
 
 const logoutUserController = async (req, res) => {
   const token = req.cookies.token;
@@ -143,7 +153,6 @@ const logoutUserController = async (req, res) => {
   });
 };
 
-
 /**
 
 * Fetches the authenticated user's information.
@@ -161,9 +170,9 @@ const logoutUserController = async (req, res) => {
   */
 
 const getUserInfoController = async (req, res) => {
-  const userId = req.user.id
+  const userId = req.user.id;
 
-  const user = await userModel.findById(userId)
+  const user = await userModel.findById(userId);
 
   return res.status(200).json({
     message: "User fetched successfulyy",
@@ -171,9 +180,9 @@ const getUserInfoController = async (req, res) => {
       id: user._id,
       username: user.username,
       email: user.email,
-      createAt: user.createdAt
-    }
-  })
+      createAt: user.createdAt,
+    },
+  });
 };
 
 module.exports = {
